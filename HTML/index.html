@@ -6,6 +6,28 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/jpg" href="Media/browser_469310.png" />
     <title>ToDoList</title>
+    <style>
+      li {
+    display: flex;
+    background-color: #eee;
+    margin: 2px;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: larger;
+}
+
+    li > button {
+    /* margin-left: auto; */
+    background-color: #d76666;
+    color: white;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+    
+    </style>
   </head>
   <body class="bg-slate-700 flex-col">
     <div
@@ -35,6 +57,12 @@
           <img src="Media/plus-button_9360554.png" alt="" class="m-2" />
           <button id="add-button">Add Work</button>
         </div>
+        <div
+          class="flex justify-center w-full bg-red-300 h-10 text-xl rounded-md"
+        >
+          <img src="Media/delete_3687412.png" alt="" class="m-2" />
+          <button id="deletebutton1">Delete ToDoList</button>
+        </div>
       </div>
       <div class="flex-col rounded-md bg-green-200 justify-evenly p-2">
         <div
@@ -46,10 +74,12 @@
           <div>Your ToDoList will be shown here</div>
         </div>
         <div>
-          <ul id="todolist" class="list-decimal list-inside text"></ul>
+          <ul id="todolist" class=" flex-col list-decimal list-inside text w-full">
+          </ul>
         </div>
       </div>
     </div>
+    <div id="snackbar" class="hidden">Some text some message..</div>
     <script type="module" src="todolist1.js"></script>
   </body>
 </html>
