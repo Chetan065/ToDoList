@@ -7,7 +7,7 @@
     <link rel="icon" type="image/jpg" href="Media/browser_469310.png" />
     <title>ToDoList</title>
     <style>
-      li {
+    li {
     display: flex;
     background-color: #eee;
     margin: 2px;
@@ -16,6 +16,14 @@
     justify-content: space-between;
     font-weight: 500;
     font-size: larger;
+}
+ #deletebutton1:hover,#specific:hover{
+  background-color: rgb(204, 92, 92);
+  color: white;
+}
+#add-button:hover{
+  background-color: rgb(118, 218, 118);
+  color: white;
 }
 
     
@@ -30,7 +38,7 @@
         "To Do List Web App"
       </h1>
     </div>
-    <div class="flex justify-center items-center h-screen space-x-10">
+    <div class="flex justify-center items-center h-screen space-x-10 flex-wrap ">
       <div class="flex-col p-4 rounded-md bg-white space-y-5">
         <div>
           <img src="Media/Checklist.jpg" alt="" class="h-40 w-50 rounded-sm" />
@@ -46,14 +54,13 @@
         <div
           class="flex justify-center w-full bg-green-300 h-10 text-xl rounded-md"
         >
-          <img src="Media/plus-button_9360554.png" alt="" class="m-2" />
-          <button id="add-button">Add Work</button>
+          
+          <button id="add-button" class="w-full flex justify-center rounded-md items-center"><img src="Media/plus-button_9360554.png" alt="" class="m-2 h-7 w-7 " />Add Work</button>
         </div>
         <div
-          class="flex justify-center w-full bg-red-300 h-10 text-xl rounded-md"
-        >
-          <img src="Media/delete_3687412.png" alt="" class="m-2" />
-          <button id="deletebutton1">Delete ToDoList</button>
+          class="flex justify-center w-full bg-red-300 h-10 text-xl rounded-md">
+          
+          <button id="deletebutton1" class="w-full flex justify-center rounded-md items-center"><img src="Media/delete_3687412.png" alt="" class="m-2 h-7 w-7 " />Delete ToDoList</button>
         </div>
       </div>
       <div class="flex-col rounded-md bg-green-200 justify-evenly p-2">

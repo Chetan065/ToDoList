@@ -30,10 +30,12 @@ function appendItems(currentItem){
         newItem.textContent = cVAL
         todolistEl.append(newItem)
         let deletebutton = document.createElement("button")
+        deletebutton.id = "specific"
         deletebutton.style.padding = "5px"
-        deletebutton.style.backgroundColor = "red"
+        deletebutton.style.borderColor = "red"
+        deletebutton.style.borderWidth = "1px"
+        deletebutton.style.borderStyle = "solid"
         deletebutton.style.borderRadius = "5px"
-        deletebutton.style.color = "white"
         deletebutton.innerHTML = "Delete"
         newItem.append(deletebutton)
         deletebutton.addEventListener("click",function(){
