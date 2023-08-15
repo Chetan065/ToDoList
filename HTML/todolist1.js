@@ -1,37 +1,87 @@
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+import {getDatabase , ref , push, onValue,remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+
+const appSettings = {
+    databaseURL : "https://todolist-2f9cb-default-rtdb.asia-southeast1.firebasedatabase.app/"
+}
+
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
+const listofitems = ref(database , "todolist")
 
 const inputfielsEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
 const todolistEl = document.getElementById("todolist")
 const deletebutton1 = document.getElementById("deletebutton1")
-var deleteButton2;
-var item;
-addButtonEl.addEventListener("click", function () {
-    let inputvalue = inputfielsEl.value;
-    if(inputvalue != "") {
-    // todolistEl.innerHTML += `<li class=" p-2  rounded-md text-2xl ">${inputvalue}</li>`
-    item = document.createElement("li");
-    let img = document.createElement("img");
-    img.src = "Media/check_5610944.png";
-    img.style.height = "20px";
-    img.style.width = "20px";
-    item.appendChild(img)
-    item.appendChild(document.createTextNode(inputvalue));
-    todolistEl.appendChild(item);
-    deleteButton2 = document.createElement("button");
-        deleteButton2.innerHTML = "Delete"
-        item.appendChild(deleteButton2)
-    deleteButton2.addEventListener("click",function(){
-            item.remove();
-      })
-      
-      
+
+
+function deletetodolist(itemsArray){
+
+    let cID = itemsArray[0]
+        let exactloc = ref(database,`todolist/${cID}`)
+        remove(exactloc)
 }
+
+function appendItems(currentItem){
+    let cID = currentItem[0]
+        let cVAL = currentItem[1]
+    if(cVAL != "") {
+        let newItem = document.createElement("li");
+        newItem.textContent = cVAL
+        todolistEl.append(newItem)
+        let deletebutton = document.createElement("button")
+        deletebutton.style.padding = "5px"
+        deletebutton.style.backgroundColor = "red"
+        deletebutton.style.borderRadius = "5px"
+        deletebutton.style.color = "white"
+        deletebutton.innerHTML = "Delete"
+        newItem.append(deletebutton)
+        deletebutton.addEventListener("click",function(){
+            let exactloc = ref(database,`todolist/${cID}`)
+            remove(exactloc)
+        })
+        deletebutton1.addEventListener("click",function(){
+           
+            deletetodolist(currentItem)
+        })
+        }
+    
+   
+}
+function clearInput(){
     inputfielsEl.value = "";
+}
+
+addButtonEl.addEventListener("click", function () {
+let inputvalue = inputfielsEl.value;
+if(inputvalue != ""){
+    push(listofitems,inputvalue)
+}
+else{
+    alert("Please Enter a work first to ADD !")
+}
+
+clearInput()
+})
+function clearul(){
+    todolistEl.innerHTML=""
+}
+onValue(listofitems,function(snapshot){
+   if(snapshot.exists()){
+    let itemsArray = Object.entries(snapshot.val())
+    clearul()
+    for(let i=0; i < itemsArray.length;i++){
+        let currentItem = itemsArray[i]
+        appendItems(currentItem)
+    }
+   }
+   else{
+    todolistEl.innerHTML = "No Work Yet ...."
+   }
+    
     
 })
-deletebutton1.addEventListener("click",function(){
-    todolistEl.remove();
-    confirm("Are you Sure you want to Delete Your ToDoList ??")
-    
-  })
+
+
+
 
